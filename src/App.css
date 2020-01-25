@@ -111,7 +111,7 @@ ul {
   position: relative;
   padding: 20px;
   padding-right: 40px;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 @media (max-width: 550px) {
