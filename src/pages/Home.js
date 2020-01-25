@@ -80,7 +80,7 @@ export default class Home extends React.Component {
                         <p>Using Redirector you don't need to save every strangers number anymore to chat them.</p>
                         <Card title="Use Redirector" bordered={false} >
                         <Form layout={formLayout}>
-                            <Form.Item label="Targeted whatsapp number">
+                            <Form.Item label="Sent to whatsapp number">
                             <Input.Group compact>
                                 <Select name="countryCode" value={countryCode} onChange={this.onChanges.bind(this, 'countryCode')} defaultValue={countryCode} style={{ width: '35%' }}>
                                     <Select.Option value="62">🇮🇩 &nbsp; 62</Select.Option>
