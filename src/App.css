@@ -114,6 +114,13 @@ ul {
   margin-top: 0px;
 }
 
+.about {
+  padding: 20px;
+}
+.content-md {
+  padding: 20px;
+}
+
 @media (max-width: 550px) {
   .logo,
   .main-nav a {
