@@ -1,7 +1,6 @@
 # WhatsappRedirector
 
 [![npm](https://img.shields.io/github/issues/burhanahmeed/reactjs-whatsapp-redirector)](https://github.com/burhanahmeed/reactjs-whatsapp-redirector)
-[![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 
 Redirector is a web app to redirect a whatsapp number to whatsapp app or web. After use this app there is no need to save stranger's number anymore to chat with them.
 
