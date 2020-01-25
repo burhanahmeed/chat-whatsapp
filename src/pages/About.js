@@ -6,7 +6,9 @@ export default class About extends React.Component {
         return (
             <div>
                 <div>
-                    Whatsapp
+                    <a href="https://github.com/burhanahmeed/reactjs-whatsapp-redirector" target="_blank">
+                        Repository to contribute
+                    </a>
                 </div>
             </div>
         );
