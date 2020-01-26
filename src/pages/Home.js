@@ -77,7 +77,7 @@ export default class Home extends React.Component {
                     <Col lg={10} xl={10}>
                     <div className="wa-card">
                         <h1><strong>Welcome to Redirector</strong></h1>
-                        <p>Using Redirector you don't need to save every strangers number anymore to chat them.</p>
+                        <p>Using Redirector you don't need to save every strangers number anymore to chat with them.</p>
                         <Card title="Use Redirector" bordered={false} >
                         <Form layout={formLayout}>
                             <Form.Item label="Targeted whatsapp number">

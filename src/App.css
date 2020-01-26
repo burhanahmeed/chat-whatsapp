@@ -48,7 +48,7 @@ body {
 	font-size: 1.45em;
 }
 
-ul {
+.header ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -130,9 +130,8 @@ ul {
     width: 300px;
   }
   .wa-card {
-    position: fixed;
     padding: 20px;
-    margin-top: 80px;
+    
     top: 20px;
     width: 100%;
   }

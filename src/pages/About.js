@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
-import '../style/markdown.css';
+import '../style/Markdown.css';
 
 export default class About extends React.Component {
     constructor () {
@@ -34,7 +34,7 @@ export default class About extends React.Component {
                     <a href="https://github.com/burhanahmeed/reactjs-whatsapp-redirector" target="_blank">
                         Repository to contribute
                     </a>
-                    <div className="content-md">
+                    <div className="content-md markdown-body">
                         <ReactMarkdown
                             source={this.state.markdown}
                         ></ReactMarkdown>
