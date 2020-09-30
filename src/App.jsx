@@ -1,8 +1,7 @@
 import React from 'react';
 // import './App.css';
 
-import { ThemeProvider, Box, Text, Link } from "@chakra-ui/core";
-import theme from "./theme";
+import { Box, Text, Link, Flex } from "@chakra-ui/core";
 
 import Home from './pages/Home.jsx';
 import About from './pages/About';
@@ -11,36 +10,40 @@ import { Route, Switch, Link as RLink, BrowserRouter as Router } from 'react-rou
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Box w="100%" bg="#276749" minH="100vh">
-        <Router>
-          <Box alignItems="center" p="3">
-            <Box d="block">
-              <Text 
-                textAlign="center" 
-                fontSize="3xl" 
-                fontWeight="bold"
-                color="white"
-              >
-                Chat Whatsapp
-              </Text>
+    <Box w="100%" bg="green.700" minH="100vh">
+      <Router>
+        <Box alignItems="center" p="5">
+          <Box d="block">
+            <Text 
+              m="0"
+              textAlign="center" 
+              fontSize="3xl" 
+              fontWeight="bold"
+              color="white"
+            >
+              Chat Whatsapp
+            </Text>
+          </Box>
+          <Box d="block">
+            <Box textAlign="center">
+              <Link as={RLink} to="/about" color="#f8fffb8f">
+                About
+              </Link>
             </Box>
-            <Box d="block">
-              <Box textAlign="center">
-                <Link as={RLink} to="/about">
-                  About
-                </Link>
-              </Box>
-            </Box>
+          </Box>
 
+          <Box w="100%">
+            <Flex align="center" bg="green.900" w="70%" borderRadius="md" m="5" mx="auto" boxShadow="md" p="5">
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
               </Switch>
+            </Flex>
           </Box>
-        </Router>
-      </Box>
-    </ThemeProvider>
+
+        </Box>
+      </Router>
+    </Box>
   );
 }
 
