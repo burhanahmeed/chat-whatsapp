@@ -23,17 +23,11 @@ const Home = () => {
   const [phone, setPhone] = useState('');
   const [messages, setMessages] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [prefix, setPrefix] = useState(62);
   const [phoneValidation, setPhoneValidation] = useState({
     isValid: true,
     text: ''
   });
-
-  const submitButton = e => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 2000);
-  }
 
   const handleChangePhone = e => {
     let value = e.target.value;
@@ -44,12 +38,26 @@ const Home = () => {
     }
   }
 
+  const handleChangeMessage = e => setMessages(e.target.value);
+
+  const sending = e => {
+    setIsLoading(true);
+    let msg = messages.split('\n').join('%0a');
+    setTimeout(() => {
+      window.open(`https://api.whatsapp.com/send?phone=${prefix}${phone}&text=${msg}&source=&data=`, '_blank');
+      setPhone('');
+      setMessages('');
+      setIsLoading(false);
+    }, 2000);
+    e.preventDefault();
+  }
+
   return (
     <Box w="100%">
       <Flex align="center" d="block" p="4">
         <Stack spacing={4}>
           <InputGroup>
-            <InputLeftAddon children="+234" bg="#082618" border="green.700" color="white" />
+            <InputLeftAddon children={`+${prefix}`} bg="#082618" border="green.700" color="white" />
             <Input 
               type="tel" 
               roundedLeft="0" 
@@ -62,10 +70,20 @@ const Home = () => {
             />
           </InputGroup>
           <Box my="2">
-            <CustomAlert text={phoneValidation.text}></CustomAlert>
+            {
+              phoneValidation.isValid ? '' : (<CustomAlert text={phoneValidation.text}></CustomAlert>)
+            }
           </Box>
-          <Textarea bg="green.800" border="green.700" color="white" placeholder="Write the message you want to send..." />
-          <SubmitButton isLoading={isLoading} handleClick={submitButton} />
+          <Textarea 
+            h="200px"
+            bg="green.800" 
+            border="green.700" 
+            color="white" 
+            placeholder="Write the message you want to send..." 
+            value={messages}
+            onChange={handleChangeMessage}
+          />
+          <SubmitButton isLoading={isLoading} handleClick={sending} />
         </Stack>
       </Flex>
     </Box>

@@ -1,7 +1,7 @@
 import React from 'react';
 // import './App.css';
 
-import { Box, Text, Link, Flex } from "@chakra-ui/core";
+import { Box, Text, Link, Flex, Badge } from "@chakra-ui/core";
 
 import Home from './pages/Home.jsx';
 import About from './pages/About';
@@ -43,6 +43,29 @@ function App() {
 
         </Box>
       </Router>
+      <Box p="6" color="white" textAlign="center">
+        <Box>
+          <Text fontSize="xs">
+            A product by &nbsp;
+            <Link href="https://kusiaga.com" isExternal>
+              <Badge variantColor="green">Burhannahm</Badge>  
+            </Link>
+          </Text>
+        </Box>
+        <Box>
+          <Text fontSize="xs">
+            Built with &nbsp;
+            <Link href="https://chakra-ui.com" isExternal>Chakra UI</Link>, &nbsp;
+            <Link href="https://reactjs.org/" isExternal>React.js</Link>. 
+            Deployed on <Link href="https://vercel.com" isExternal>Vercel</Link>
+          </Text>
+        </Box>
+        <Box>
+          <Text fontSize="xs">
+            Source code on <Link href="https://github.com/burhanahmeed/chat-whatsapp" isExternal>Github</Link>
+          </Text>
+        </Box>
+      </Box>
     </Box>
   );
 }
