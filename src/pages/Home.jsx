@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Flex, Box, Stack, InputLeftAddon, InputGroup, Input, Textarea, Button } from "@chakra-ui/core";
+import { Flex, Box, Stack, Textarea, Button } from "@chakra-ui/core";
 import CustomAlert from "../components/CustomAlert.jsx";
+import PhoneNumber from "../components/PhoneNumber.jsx";
 
 const SubmitButton = (props) => {
   if (props.isLoading) {
@@ -28,6 +29,7 @@ const Home = () => {
     isValid: true,
     text: ''
   });
+  const [isNewNumber, setIsNewNumber] = useState(true);
 
   const handleChangePhone = e => {
     let value = e.target.value;
@@ -41,6 +43,13 @@ const Home = () => {
   const handleChangeMessage = e => setMessages(e.target.value);
 
   const sending = e => {
+    if (!phoneValidation.isValid) {
+      return false;
+    }
+    if (phone === '') {
+      setPhoneValidation({ isValid: false, text: 'Phone number is invalid' });
+      return false;
+    }
     setIsLoading(true);
     let msg = messages.split('\n').join('%0a');
     setTimeout(() => {
@@ -52,23 +61,18 @@ const Home = () => {
     e.preventDefault();
   }
 
+  const handleChangeNumberField = () => {
+    setIsNewNumber(!isNewNumber)
+  }
+
   return (
     <Box w="100%">
       <Flex align="center" d="block" p="4">
         <Stack spacing={4}>
-          <InputGroup>
-            <InputLeftAddon children={`+${prefix}`} bg="#082618" border="green.700" color="white" />
-            <Input 
-              type="tel" 
-              roundedLeft="0" 
-              placeholder="phone number" 
-              bg="green.800" 
-              border="green.700" 
-              color="white" 
-              value={phone}
-              onChange={handleChangePhone}
-            />
-          </InputGroup>
+          <PhoneNumber 
+            newNumber={isNewNumber} 
+            changeNumberField={handleChangeNumberField}
+          />
           <Box my="2">
             {
               phoneValidation.isValid ? '' : (<CustomAlert text={phoneValidation.text}></CustomAlert>)

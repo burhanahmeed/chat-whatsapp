@@ -26,7 +26,11 @@ function App() {
           </Box>
           <Box d="block">
             <Box textAlign="center">
-              <Link as={RLink} to="/about" color="#f8fffb8f">
+              <Link mx="2" as={RLink} to="/about" color="#f8fffb8f">
+                Message history
+              </Link>
+              <span style={{'color': 'white'}}>|</span>
+              <Link mx="2" as={RLink} to="/about" color="#f8fffb8f">
                 About
               </Link>
             </Box>
