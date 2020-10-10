@@ -2,8 +2,11 @@ import React  from 'react';
 import { 
   Box,
   Text,
-  Button
+  Button,
+  useDisclosure
  } from "@chakra-ui/core";
+
+import CreateModal from "../components/Phonebook/Modal.jsx";
 
 const BookItem = () => {
   return (
@@ -33,6 +36,8 @@ const BookItem = () => {
 }
 
 const Phonebook = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box color="white" w="100%">
       <Box d="flex" justifyContent="space-between">
@@ -42,7 +47,7 @@ const Phonebook = () => {
           fontSize="xl"
         >📱 My Phonebook</Text>
         <Box p="4">
-          <Button size="xs">
+          <Button size="xs" onClick={onOpen}>
             <Text 
               color="gray.700"
             >Add contact</Text>
@@ -56,6 +61,10 @@ const Phonebook = () => {
           })
         }
       </Box>
+      <CreateModal 
+        isOpen={isOpen} 
+        onClose={onClose}
+      />
     </Box>
   );
 }
