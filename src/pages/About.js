@@ -12,6 +12,7 @@ export default class About extends React.Component {
     }
 
     componentWillMount () {
+        console.log(this.props.location)
         let self = this;
         var url = `https://api.github.com/repos/burhanahmeed/reactjs-whatsapp-redirector/contents/README.md`;
         var myRequest = new Request(url, { headers: new Headers({'accept':'application/vnd.github.v3.raw'})});

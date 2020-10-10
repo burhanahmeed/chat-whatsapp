@@ -5,6 +5,8 @@ import { Box, Text, Link, Flex, Badge } from "@chakra-ui/core";
 
 import Home from './pages/Home.jsx';
 import About from './pages/About';
+import Phonebook from './pages/Phonebook.jsx';
+import History from './pages/History.jsx';
 
 import { Route, Switch, Link as RLink, BrowserRouter as Router } from 'react-router-dom';
 
@@ -21,12 +23,14 @@ function App() {
               fontWeight="bold"
               color="white"
             >
-              Chat Whatsapp
+              <Link as={RLink} to="/">
+                Chat Whatsapp
+              </Link>
             </Text>
           </Box>
           <Box d="block">
             <Box textAlign="center">
-              <Link mx="2" as={RLink} to="/about" color="#f8fffb8f">
+              <Link mx="2" as={RLink} to="/history" color="#f8fffb8f">
                 Message history
               </Link>
               <span style={{'color': 'white'}}>|</span>
@@ -41,6 +45,8 @@ function App() {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
+                <Route path="/phonebook" component={Phonebook} />
+                <Route path="/history" component={History} />
               </Switch>
             </Flex>
           </Box>
@@ -59,14 +65,14 @@ function App() {
         <Box>
           <Text fontSize="xs">
             Built with &nbsp;
-            <Link href="https://chakra-ui.com" isExternal>Chakra UI</Link>, &nbsp;
-            <Link href="https://reactjs.org/" isExternal>React.js</Link>. 
-            Deployed on <Link href="https://vercel.com" isExternal>Vercel</Link>
+            <Link href="https://chakra-ui.com" isExternal color="blue.300">Chakra UI</Link>, &nbsp;
+            <Link href="https://reactjs.org/" isExternal color="blue.300">React.js</Link>. 
+            Deployed on <Link href="https://vercel.com" isExternal color="blue.300">Vercel</Link>
           </Text>
         </Box>
         <Box>
           <Text fontSize="xs">
-            Source code on <Link href="https://github.com/burhanahmeed/chat-whatsapp" isExternal>Github</Link>
+            Source code on <Link href="https://github.com/burhanahmeed/chat-whatsapp" isExternal color="blue.300">Github</Link>
           </Text>
         </Box>
       </Box>

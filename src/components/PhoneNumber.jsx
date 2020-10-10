@@ -10,6 +10,7 @@ import {
   Stack,
   Badge
 } from "@chakra-ui/core";
+import { Link as RLink } from 'react-router-dom';
 import { MdPermContactCalendar } from "react-icons/md"
 import { AiOutlineWhatsApp } from "react-icons/ai"
 
@@ -28,7 +29,7 @@ const InputNumber = ({ changeField }) => {
         />
       </InputGroup>
       <Box mt="2" float="right">
-        <Link color="white" onClick={changeField}>
+        <Link color="white" as={RLink} to={{pathname: '/phonebook', state: {'aaa': 111}}}>
           <Box d="flex">
             <Box as={MdPermContactCalendar} size="16px" color="green.400" />
             <Text fontSize="xs">
