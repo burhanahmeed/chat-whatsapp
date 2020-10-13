@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import { 
   Box,
   Text,
@@ -10,10 +10,15 @@ import CreateModal from "../components/Phonebook/Modal.jsx";
 import { BsPencil } from "react-icons/bs"
 import { BiTrashAlt } from "react-icons/bi"
 
-const BookItem = () => {
+const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
   const [iconShowed, setIconShowed] = useState(false)
   const handleMouseEnter = () => setIconShowed(true)
   const handleMouseLeave = () => setIconShowed(false)
+  const remove = (id) => {
+    handleRemove({number: id})
+    handleInit()
+  }
+
   return (
     <Box 
       d="flex"
@@ -28,18 +33,18 @@ const BookItem = () => {
         <Text 
           fontWeight="bold" 
           fontSize="md"
-        >😊 Aditiawarnam</Text>
+        >😊 { data.name }</Text>
         <Text 
           fontSize="md"
-        >📲 65837199213</Text>
+        >📲 { data.number }</Text>
       </Box>
       <Box p="3" d="flex">
         {
           !iconShowed || 
           (
             <Box d="flex" m="1" mx="3" justifyContent="right" cursor="pointer">
-              <Box mr="4" as={BsPencil} size="16px" color="green.400" />
-              <Box as={BiTrashAlt} size="16px" color="green.400" />
+              <Box onClick={() => editModal({ number: data.number })} mr="4" as={BsPencil} size="16px" color="green.400" />
+              <Box onClick={() => remove(data.number)} as={BiTrashAlt} size="16px" color="green.400" />
             </Box>
           )
         }
@@ -53,6 +58,40 @@ const BookItem = () => {
 
 const Phonebook = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [phonebooks, setPhonebooks] = useState([])
+  const [modalProps, setModalProps] = useState({})
+  useEffect(() => {
+    getInitialPhonebook()
+  }, [])
+  const getInitialPhonebook = () => {
+    let initial = localStorage.getItem('phonebook')
+    if (initial) {
+      let arrays = JSON.parse(initial)
+      setPhonebooks(arrays)
+    }
+  }
+  const handleRemove = ({ number }) => {
+    let initial = localStorage.getItem('phonebook')
+    initial = JSON.parse(initial)
+    let idx = initial.findIndex(el => el.number == number)
+    if (idx != -1) {
+      initial.splice(idx, 1)
+      localStorage.setItem('phonebook', JSON.stringify(initial))
+    }
+  }
+  const handleEditModal = ({ number }) => {
+    let initial = localStorage.getItem('phonebook')
+    initial = JSON.parse(initial)
+    let idx = initial.findIndex(el => el.number == number)
+    if (idx != -1) {
+      setModalProps(initial[idx])
+      onOpen()
+    }
+  }
+  const handleModalClose = () => {
+    setModalProps({})
+    onClose()
+  }
 
   return (
     <Box color="white" w="100%">
@@ -72,15 +111,29 @@ const Phonebook = () => {
       </Box>
       <Box p="3" w="100%" h="calc(100vh - 120px)" overflowX="auto">
         {
-          [2, 3,4,5,6,7,8,9,1,2,3,4].map(el => {
-            return <BookItem/>
+          phonebooks.map(el => {
+            return (
+            <BookItem 
+              key={el.number} 
+              data={el}
+              handleRemove={handleRemove}
+              handleInit={getInitialPhonebook}
+              editModal={handleEditModal}
+            />
+            )
           })
         }
       </Box>
-      <CreateModal 
-        isOpen={isOpen} 
-        onClose={onClose}
-      />
+      {
+        isOpen ? (
+          <CreateModal 
+            isOpen={isOpen} 
+            onClose={handleModalClose}
+            handleInit={getInitialPhonebook}
+            data={modalProps}
+          />
+        ) : null
+      }
     </Box>
   );
 }

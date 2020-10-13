@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -14,13 +14,19 @@ import {
 } from "@chakra-ui/core";
 import CustomAlert from "../CustomAlert";
 
-const Create = ({ isOpen, onClose, onOpen }) => {
+const Create = ({ isOpen, onClose, onOpen, handleInit, data }) => {
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
   const [phoneValidation, setPhoneValidation] = useState({
     isValid: true,
     text: ''
   })
+  useEffect(() => {
+    if (Object.keys(data).length > 0) {
+      setName(data.name)
+      setNumber(data.number) 
+    }
+  }, [])
   const handleClose = () => {
     onClose()
     setName('')
@@ -43,20 +49,32 @@ const Create = ({ isOpen, onClose, onOpen }) => {
     setPhoneValidation({ isValid: true, text: '' });
     let initial = []
     let result = localStorage.getItem('phonebook')
-    if (result) {
-      let checkNumber = JSON.parse(result).find(el => el.number == Number(number))
-      if (checkNumber) {
-        setPhoneValidation({ isValid: false, text: 'Phone number already exists' })
-        return false
+    if (Object.keys(data).length > 0) {
+      if (result) {
+        let idx = JSON.parse(result).findIndex(el => el.number == Number(number))
+        if (idx != -1) {
+          initial = JSON.parse(result)
+          initial[idx].name = name
+          initial[idx].number = number
+        }
       }
-      initial = JSON.parse(result)
+    } else {
+      if (result) {
+        let checkNumber = JSON.parse(result).find(el => el.number == Number(number))
+        if (checkNumber) {
+          setPhoneValidation({ isValid: false, text: 'Phone number already exists' })
+          return false
+        }
+        initial = JSON.parse(result)
+      }
+      let params = {
+        name,
+        number
+      }
+      initial.push(params)
     }
-    let params = {
-      name,
-      number
-    }
-    initial.push(params)
     localStorage.setItem('phonebook', JSON.stringify(initial))
+    handleInit()
     handleClose()
   }
 
@@ -81,10 +99,10 @@ const Create = ({ isOpen, onClose, onOpen }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variantColor="green" mr={3} onClick={handleClose}>
+            <Button variant="ghost" mr={3} onClick={handleClose}>
               Close
             </Button>
-            <Button variant="ghost" onClick={save}>Save</Button>
+            <Button variantColor="green" onClick={save}>Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
