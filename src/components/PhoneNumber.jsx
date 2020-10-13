@@ -22,7 +22,7 @@ const InputNumber = ({ changeField }) => {
         <Input 
           type="tel" 
           roundedLeft="0" 
-          placeholder="example: 6559402131xxx"
+          placeholder="example: 6259402131xxx"
           bg="green.800" 
           border="green.700" 
           color="white"
