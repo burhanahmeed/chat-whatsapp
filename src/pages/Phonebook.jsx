@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useState }  from 'react';
 import { 
   Box,
   Text,
@@ -7,8 +7,13 @@ import {
  } from "@chakra-ui/core";
 
 import CreateModal from "../components/Phonebook/Modal.jsx";
+import { BsPencil } from "react-icons/bs"
+import { BiTrashAlt } from "react-icons/bi"
 
 const BookItem = () => {
+  const [iconShowed, setIconShowed] = useState(false)
+  const handleMouseEnter = () => setIconShowed(true)
+  const handleMouseLeave = () => setIconShowed(false)
   return (
     <Box 
       d="flex"
@@ -16,6 +21,8 @@ const BookItem = () => {
       borderBottomColor="gray.200" 
       borderBottom="1px" 
       p="3"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <Box>
         <Text 
@@ -26,7 +33,16 @@ const BookItem = () => {
           fontSize="md"
         >📲 65837199213</Text>
       </Box>
-      <Box p="3">
+      <Box p="3" d="flex">
+        {
+          !iconShowed || 
+          (
+            <Box d="flex" m="1" mx="3" justifyContent="right" cursor="pointer">
+              <Box mr="4" as={BsPencil} size="16px" color="green.400" />
+              <Box as={BiTrashAlt} size="16px" color="green.400" />
+            </Box>
+          )
+        }
         <Button variantColor="teal" size="xs">
           💬 Send Whatsapp
         </Button>
