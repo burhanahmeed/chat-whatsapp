@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flex, Box, Stack, Textarea, Button } from "@chakra-ui/core";
 import CustomAlert from "../components/CustomAlert.jsx";
 import PhoneNumber from "../components/PhoneNumber.jsx";
@@ -20,25 +20,24 @@ const SubmitButton = (props) => {
   )
 }
 
-const Home = () => {
+const Home = (props) => {
   const [phone, setPhone] = useState('');
   const [messages, setMessages] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [prefix, setPrefix] = useState(62);
   const [phoneValidation, setPhoneValidation] = useState({
     isValid: true,
     text: ''
   });
   const [isNewNumber, setIsNewNumber] = useState(true);
+  const [contact, setContact] = useState({})
 
-  const handleChangePhone = e => {
-    let value = e.target.value;
-    setPhoneValidation({ isValid: true, text: '' });
-    setPhone(value);
-    if (isNaN(Number(value))) {
-      setPhoneValidation({ isValid: false, text: 'Phone number is invalid' });
+  useEffect(() => {
+    if (props.location.state) {
+      setIsNewNumber(false)
+      setContact(props.location.state)
+      setPhone(props.location.state.number)
     }
-  }
+  }, [])
 
   const handleChangeMessage = e => setMessages(e.target.value);
 
@@ -53,7 +52,7 @@ const Home = () => {
     setIsLoading(true);
     let msg = messages.split('\n').join('%0a');
     setTimeout(() => {
-      window.open(`https://api.whatsapp.com/send?phone=${prefix}${phone}&text=${msg}&source=&data=`, '_blank');
+      window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${msg}&source=&data=`, '_blank');
       setPhone('');
       setMessages('');
       setIsLoading(false);
@@ -65,6 +64,14 @@ const Home = () => {
     setIsNewNumber(!isNewNumber)
   }
 
+  const handleNumberChange = (value) => {
+    setPhoneValidation({ isValid: true, text: '' });
+    setPhone(value);
+    if (isNaN(Number(value))) {
+      setPhoneValidation({ isValid: false, text: 'Phone number is invalid' });
+    }
+  }
+  
   return (
     <Box w="100%">
       <Flex align="center" d="block" p="4">
@@ -72,6 +79,8 @@ const Home = () => {
           <PhoneNumber 
             newNumber={isNewNumber} 
             changeNumberField={handleChangeNumberField}
+            onNumberChange={handleNumberChange}
+            contactData={contact}
           />
           <Box my="2">
             {

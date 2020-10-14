@@ -14,7 +14,13 @@ import { Link as RLink } from 'react-router-dom';
 import { MdPermContactCalendar } from "react-icons/md"
 import { AiOutlineWhatsApp } from "react-icons/ai"
 
-const InputNumber = ({ changeField }) => {
+const InputNumber = ({ onNumberChange }) => {
+  const [number, setNumber] = React.useState('')
+  const handleNumberChange = (e) => {
+    let value = e.target.value
+    setNumber(value)
+    onNumberChange(value)
+  }
   return (
     <Box>
       <InputGroup>
@@ -26,10 +32,12 @@ const InputNumber = ({ changeField }) => {
           bg="green.800" 
           border="green.700" 
           color="white"
+          value={number}
+          onChange={handleNumberChange}
         />
       </InputGroup>
       <Box mt="2" float="right">
-        <Link color="white" as={RLink} to={{pathname: '/phonebook', state: {'aaa': 111}}}>
+        <Link color="white" as={RLink} to={{ pathname: '/phonebook' }}>
           <Box d="flex">
             <Box as={MdPermContactCalendar} size="16px" color="green.400" />
             <Text fontSize="xs">
@@ -42,12 +50,12 @@ const InputNumber = ({ changeField }) => {
   )
 }
 
-const PhonebookNumber = ({ changeField }) => {
+const PhonebookNumber = ({ data, changeField }) => {
   return (
     <Box>
       <Stack isInline py="2">
         <Text color="white">Send to: </Text>
-        <Badge>urhan ahmed (6239912000)</Badge>
+        <Badge>{ data.name } ({ data.number })</Badge>
         <Link color="white" onClick={changeField}>
           <Box d="flex">
             <Box as={AiOutlineWhatsApp} size="16px" color="green.400" mx="1" />
@@ -61,11 +69,16 @@ const PhonebookNumber = ({ changeField }) => {
   )
 }
 
-const PhoneNumber = ({ newNumber, changeNumberField }) => {
+const PhoneNumber = ({ 
+  newNumber, 
+  changeNumberField, 
+  onNumberChange,
+  contactData
+}) => {
   if (newNumber) {
-    return <InputNumber changeField={changeNumberField} />
+    return <InputNumber onNumberChange={onNumberChange} />
   } else {
-    return <PhonebookNumber changeField={changeNumberField} />
+    return <PhonebookNumber data={contactData} changeField={changeNumberField} />
   }
 }
 

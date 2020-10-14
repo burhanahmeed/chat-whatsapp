@@ -3,9 +3,10 @@ import {
   Box,
   Text,
   Button,
-  useDisclosure
+  useDisclosure,
+  Link
  } from "@chakra-ui/core";
-
+import { Link as RLink } from 'react-router-dom';
 import CreateModal from "../components/Phonebook/Modal.jsx";
 import { BsPencil } from "react-icons/bs"
 import { BiTrashAlt } from "react-icons/bi"
@@ -40,7 +41,6 @@ const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
       </Box>
       <Box p="3" d="flex">
         {
-          !iconShowed || 
           (
             <Box d="flex" m="1" mx="3" justifyContent="right" cursor="pointer">
               <Box onClick={() => editModal({ number: data.number })} mr="4" as={BsPencil} size="16px" color="green.400" />
@@ -48,9 +48,11 @@ const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
             </Box>
           )
         }
-        <Button variantColor="teal" size="xs">
-          💬 Send Whatsapp
-        </Button>
+        <Link color="white" as={RLink} to={{ pathname: '/', state: data }}>
+          <Button variantColor="teal" size="xs">
+            💬 Send Whatsapp
+          </Button>
+        </Link>
       </Box>
     </Box>
   );
