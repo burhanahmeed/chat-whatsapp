@@ -1,8 +1,7 @@
-import React, { Component }  from 'react';
+import React  from 'react';
 import {
   Alert,
   AlertIcon,
-  AlertTitle,
   AlertDescription,
 } from "@chakra-ui/core";
 

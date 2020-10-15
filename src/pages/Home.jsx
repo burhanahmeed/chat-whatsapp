@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Flex, Box, Stack, InputLeftAddon, InputGroup, Input, Textarea, Button } from "@chakra-ui/core";
+import React, { useState, useEffect } from 'react';
+import { Flex, Box, Stack, Textarea, Button } from "@chakra-ui/core";
 import CustomAlert from "../components/CustomAlert.jsx";
+import PhoneNumber from "../components/PhoneNumber.jsx";
 
 const SubmitButton = (props) => {
   if (props.isLoading) {
@@ -19,32 +20,47 @@ const SubmitButton = (props) => {
   )
 }
 
-const Home = () => {
+const Home = (props) => {
   const [phone, setPhone] = useState('');
   const [messages, setMessages] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [prefix, setPrefix] = useState(62);
   const [phoneValidation, setPhoneValidation] = useState({
     isValid: true,
     text: ''
   });
+  const [isNewNumber, setIsNewNumber] = useState(true);
+  const [contact, setContact] = useState({})
 
-  const handleChangePhone = e => {
-    let value = e.target.value;
-    setPhoneValidation({ isValid: true, text: '' });
-    setPhone(value);
-    if (isNaN(Number(value))) {
-      setPhoneValidation({ isValid: false, text: 'Phone number is invalid' });
+  useEffect(() => {
+    if (props.location.state) {
+      setIsNewNumber(false)
+      setContact(props.location.state)
+      setPhone(props.location.state.number)
     }
-  }
+  }, [])
 
   const handleChangeMessage = e => setMessages(e.target.value);
 
   const sending = e => {
+    if (!phoneValidation.isValid) {
+      return false;
+    }
+    if (phone === '') {
+      setPhoneValidation({ isValid: false, text: 'Phone number is invalid' });
+      return false;
+    }
     setIsLoading(true);
     let msg = messages.split('\n').join('%0a');
+    let inserted = []
+    inserted.push({ number: phone, text: msg, createdAt: new Date() })
+    let history = localStorage.getItem('history')
+    if (history) {
+        inserted = [...JSON.parse(history)]
+        inserted.splice(0, 0, { number: phone, text: msg, createdAt: new Date() })
+    }
+    localStorage.setItem('history', JSON.stringify(inserted))
     setTimeout(() => {
-      window.open(`https://api.whatsapp.com/send?phone=${prefix}${phone}&text=${msg}&source=&data=`, '_blank');
+      window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${msg}&source=&data=`, '_blank');
       setPhone('');
       setMessages('');
       setIsLoading(false);
@@ -52,23 +68,28 @@ const Home = () => {
     e.preventDefault();
   }
 
+  const handleChangeNumberField = () => {
+    setIsNewNumber(!isNewNumber)
+  }
+
+  const handleNumberChange = (value) => {
+    setPhoneValidation({ isValid: true, text: '' });
+    setPhone(value);
+    if (isNaN(Number(value))) {
+      setPhoneValidation({ isValid: false, text: 'Phone number is invalid' });
+    }
+  }
+  
   return (
     <Box w="100%">
       <Flex align="center" d="block" p="4">
         <Stack spacing={4}>
-          <InputGroup>
-            <InputLeftAddon children={`+${prefix}`} bg="#082618" border="green.700" color="white" />
-            <Input 
-              type="tel" 
-              roundedLeft="0" 
-              placeholder="phone number" 
-              bg="green.800" 
-              border="green.700" 
-              color="white" 
-              value={phone}
-              onChange={handleChangePhone}
-            />
-          </InputGroup>
+          <PhoneNumber 
+            newNumber={isNewNumber} 
+            changeNumberField={handleChangeNumberField}
+            onNumberChange={handleNumberChange}
+            contactData={contact}
+          />
           <Box my="2">
             {
               phoneValidation.isValid ? '' : (<CustomAlert text={phoneValidation.text}></CustomAlert>)
