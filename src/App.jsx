@@ -4,7 +4,7 @@ import React from 'react';
 import { Box, Text, Link, Flex, Badge } from "@chakra-ui/core";
 
 import Home from './pages/Home.jsx';
-import About from './pages/About';
+import About from './pages/About.jsx';
 import Phonebook from './pages/Phonebook.jsx';
 import History from './pages/History.jsx';
 
@@ -24,7 +24,7 @@ function App() {
               color="white"
             >
               <Link as={RLink} to="/">
-                Chat Whatsapp
+                Whatsy
               </Link>
             </Text>
           </Box>

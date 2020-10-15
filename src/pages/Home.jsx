@@ -51,6 +51,14 @@ const Home = (props) => {
     }
     setIsLoading(true);
     let msg = messages.split('\n').join('%0a');
+    let inserted = []
+    inserted.push({ number: phone, text: msg, createdAt: new Date() })
+    let history = localStorage.getItem('history')
+    if (history) {
+        inserted = [...JSON.parse(history)]
+        inserted.splice(0, 0, { number: phone, text: msg, createdAt: new Date() })
+    }
+    localStorage.setItem('history', JSON.stringify(inserted))
     setTimeout(() => {
       window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${msg}&source=&data=`, '_blank');
       setPhone('');

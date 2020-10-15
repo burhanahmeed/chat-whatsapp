@@ -24,7 +24,7 @@ const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
     <Box 
       d="flex"
       justifyContent="space-between"
-      borderBottomColor="gray.200" 
+      borderBottomColor="green.500" 
       borderBottom="1px" 
       p="3"
       onMouseEnter={handleMouseEnter}
@@ -42,9 +42,9 @@ const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
       <Box p="3" d="flex">
         {
           (
-            <Box d="flex" m="1" mx="3" justifyContent="right" cursor="pointer">
-              <Box onClick={() => editModal({ number: data.number })} mr="4" as={BsPencil} size="16px" color="green.400" />
-              <Box onClick={() => remove(data.number)} as={BiTrashAlt} size="16px" color="green.400" />
+            <Box d="flex" m="1" mx="4" justifyContent="right" cursor="pointer">
+              <Box onClick={() => editModal({ number: data.number })} mr="4" as={BsPencil} size="16px" color="white.400" />
+              <Box onClick={() => remove(data.number)} as={BiTrashAlt} size="16px" color="white.400" />
             </Box>
           )
         }
@@ -101,8 +101,7 @@ const Phonebook = () => {
         <Text 
           py="5"
           fontWeight="bold" 
-          fontSize="xl"
-        >📱 My Phonebook</Text>
+        >My Phonebook</Text>
         <Box p="4">
           <Button size="xs" onClick={onOpen}>
             <Text 
