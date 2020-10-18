@@ -28,7 +28,7 @@ const InputNumber = ({ onNumberChange }) => {
         <Input 
           type="tel" 
           roundedLeft="0" 
-          placeholder="example: 6259402131xxx"
+          placeholder="62123456789"
           bg="gray.100" 
           color="green.800"
           value={number}

@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {
   Box,
   Badge,
-  Text
+  Text,
+  Image
 } from '@chakra-ui/core'
 
 const History = () => {
@@ -35,8 +36,9 @@ const History = () => {
           </Text>
         </Box>
       </Box>
-      <Box h="calc(100vh - 120px)" overflowX="auto">
+      <Box h="calc(100vh - 290px)" overflowX="auto">
         {
+          histories.length > 0 ?
           histories.map(el => {
             return (
               <Box bg="gray.100" p="3" mb="2">
@@ -53,7 +55,12 @@ const History = () => {
                 </Box>
               </Box>
             )
-          })
+          }) : (
+            <Box mx="auto" d="block" textAlign="center" pt="70px">
+              <Image m="auto" h="130px" src="/history.svg" alt="history" />
+              <Text color="gray.500" pt="4" fontSize="md">We will be storing your data to your browser localStorage.</Text>
+            </Box>
+          )
         }
       </Box>
     </Box>

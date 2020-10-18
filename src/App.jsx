@@ -12,13 +12,12 @@ import { Route, Switch, Link as RLink, BrowserRouter as Router } from 'react-rou
 
 function App() {
   return (
-    <Box w="100%" minH="100vh">
+    <Box w="100%" minH="100vh" bg="gray.50">
       <Router>
         <Box alignItems="center" p="5">
-          <Box d="block">
+          <Box d="block" textAlign="center" mb="4">
             <Text 
               m="0"
-              textAlign="center" 
               fontSize="3xl" 
               fontWeight="bold"
               color="green.700"
@@ -27,15 +26,26 @@ function App() {
                 Whatsy
               </Link>
             </Text>
+            <Text fontSize="xs">
+              Send Whatsapp message without saving the number on your phone.
+            </Text>
           </Box>
           <Box d="block">
             <Box textAlign="center">
-              <Link mx="2" as={RLink} to="/history" color="green.500">
-                Message history
+              <Link mx="2" as={RLink} to="/">
+                <Box bg="gray.200" p="2" d="inline-block" borderRadius="5px">
+                🏠 Home
+                </Box>
               </Link>
-              <span style={{'color': 'green'}}>|</span>
-              <Link mx="2" as={RLink} to="/about" color="green.500">
-                About
+              <Link mx="2" as={RLink} to="/history">
+                <Box bg="gray.200" p="2" d="inline-block" borderRadius="5px">
+                🧳 Message history
+                </Box>
+              </Link>
+              <Link mx="2" as={RLink} to="/about">
+                <Box bg="gray.200" p="2" d="inline-block" borderRadius="5px">
+                👋🏻 About
+                </Box>
               </Link>
             </Box>
           </Box>

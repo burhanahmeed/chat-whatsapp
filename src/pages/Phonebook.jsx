@@ -4,7 +4,8 @@ import {
   Text,
   Button,
   useDisclosure,
-  Link
+  Link,
+  Image
  } from "@chakra-ui/core";
 import { Link as RLink } from 'react-router-dom';
 import CreateModal from "../components/Phonebook/Modal.jsx";
@@ -99,7 +100,7 @@ const Phonebook = () => {
   }
 
   return (
-    <Box color="white" w="100%">
+    <Box w="100%">
       <Box d="flex" justifyContent="space-between">
         <Text 
           py="5"
@@ -107,15 +108,15 @@ const Phonebook = () => {
           color="green.700" 
         >My Phonebook</Text>
         <Box p="4">
-          <Button size="xs" onClick={onOpen}>
+          <Button variantColor="green" size="xs" onClick={onOpen}>
             <Text 
-              color="gray.700"
             >Add contact</Text>
           </Button>
         </Box>
       </Box>
-      <Box p="3" w="100%" h="calc(100vh - 120px)" overflowX="auto">
+      <Box p="3" w="100%" h="calc(100vh - 290px)" overflowX="auto">
         {
+          phonebooks.length > 0 ?
           phonebooks.map(el => {
             return (
             <BookItem 
@@ -126,7 +127,12 @@ const Phonebook = () => {
               editModal={handleEditModal}
             />
             )
-          })
+          }) : (
+            <Box mx="auto" d="block" textAlign="center" pt="70px">
+              <Image m="auto" h="130px" src="/phonebook.svg" alt="Phonebook" />
+              <Text color="gray.500" pt="4" fontSize="md">We will be storing your data to your browser localStorage.</Text>
+            </Box>
+          )
         }
       </Box>
       {
