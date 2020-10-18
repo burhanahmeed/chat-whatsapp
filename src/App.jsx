@@ -12,7 +12,7 @@ import { Route, Switch, Link as RLink, BrowserRouter as Router } from 'react-rou
 
 function App() {
   return (
-    <Box w="100%" bg="green.700" minH="100vh">
+    <Box w="100%" minH="100vh">
       <Router>
         <Box alignItems="center" p="5">
           <Box d="block">
@@ -21,7 +21,7 @@ function App() {
               textAlign="center" 
               fontSize="3xl" 
               fontWeight="bold"
-              color="white"
+              color="green.700"
             >
               <Link as={RLink} to="/">
                 Whatsy
@@ -30,18 +30,18 @@ function App() {
           </Box>
           <Box d="block">
             <Box textAlign="center">
-              <Link mx="2" as={RLink} to="/history" color="#f8fffb8f">
+              <Link mx="2" as={RLink} to="/history" color="green.500">
                 Message history
               </Link>
-              <span style={{'color': 'white'}}>|</span>
-              <Link mx="2" as={RLink} to="/about" color="#f8fffb8f">
+              <span style={{'color': 'green'}}>|</span>
+              <Link mx="2" as={RLink} to="/about" color="green.500">
                 About
               </Link>
             </Box>
           </Box>
 
           <Box w="100%">
-            <Flex align="center" bg="green.900" w="70%" borderRadius="md" m="5" mx="auto" boxShadow="md" p="5">
+            <Flex align="center" w="70%" borderRadius="md" m="5" mx="auto">
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
@@ -53,7 +53,7 @@ function App() {
 
         </Box>
       </Router>
-      <Box p="6" color="white" textAlign="center">
+      <Box p="6" color="green.700" textAlign="center">
         <Box>
           <Text fontSize="xs">
             A product by &nbsp;
@@ -64,15 +64,13 @@ function App() {
         </Box>
         <Box>
           <Text fontSize="xs">
-            Built with &nbsp;
-            <Link href="https://chakra-ui.com" isExternal color="blue.300">Chakra UI</Link>, &nbsp;
-            <Link href="https://reactjs.org/" isExternal color="blue.300">React.js</Link>. 
-            Deployed on <Link href="https://vercel.com" isExternal color="blue.300">Vercel</Link>
-          </Text>
-        </Box>
-        <Box>
-          <Text fontSize="xs">
-            Source code on <Link href="https://github.com/burhanahmeed/chat-whatsapp" isExternal color="blue.300">Github</Link>
+            Source code on &nbsp;
+            <Link 
+              href="https://github.com/burhanahmeed/chat-whatsapp" 
+              isExternal 
+              color="blue.800"
+              fontWeight="bold"
+            >Github</Link>
           </Text>
         </Box>
       </Box>

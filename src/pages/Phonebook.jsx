@@ -25,8 +25,9 @@ const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
       d="flex"
       justifyContent="space-between"
       borderBottomColor="green.500" 
-      borderBottom="1px" 
       p="3"
+      bg="gray.100"
+      mb="2"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -34,22 +35,24 @@ const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
         <Text 
           fontWeight="bold" 
           fontSize="md"
+          color="green.700"
         >😊 { data.name }</Text>
         <Text 
           fontSize="md"
+          color="green.700"
         >📲 { data.number }</Text>
       </Box>
       <Box p="3" d="flex">
         {
           (
             <Box d="flex" m="1" mx="4" justifyContent="right" cursor="pointer">
-              <Box onClick={() => editModal({ number: data.number })} mr="4" as={BsPencil} size="16px" color="white.400" />
-              <Box onClick={() => remove(data.number)} as={BiTrashAlt} size="16px" color="white.400" />
+              <Box onClick={() => editModal({ number: data.number })} mr="4" as={BsPencil} size="16px" color="green.700" />
+              <Box onClick={() => remove(data.number)} as={BiTrashAlt} size="16px" color="green.700" />
             </Box>
           )
         }
         <Link color="white" as={RLink} to={{ pathname: '/', state: data }}>
-          <Button variantColor="teal" size="xs">
+          <Button variantColor="green" size="xs">
             💬 Send Whatsapp
           </Button>
         </Link>
@@ -101,6 +104,7 @@ const Phonebook = () => {
         <Text 
           py="5"
           fontWeight="bold" 
+          color="green.700" 
         >My Phonebook</Text>
         <Box p="4">
           <Button size="xs" onClick={onOpen}>

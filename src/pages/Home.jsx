@@ -97,9 +97,7 @@ const Home = (props) => {
           </Box>
           <Textarea 
             h="200px"
-            bg="green.800" 
-            border="green.700" 
-            color="white" 
+            bg="gray.100" 
             placeholder="Write the message you want to send..." 
             value={messages}
             onChange={handleChangeMessage}

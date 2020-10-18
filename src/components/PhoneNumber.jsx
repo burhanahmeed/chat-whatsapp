@@ -29,20 +29,21 @@ const InputNumber = ({ onNumberChange }) => {
           type="tel" 
           roundedLeft="0" 
           placeholder="example: 6259402131xxx"
-          bg="green.800" 
-          border="green.700" 
-          color="white"
+          bg="gray.100" 
+          color="green.800"
           value={number}
           onChange={handleNumberChange}
         />
       </InputGroup>
       <Box mt="2" float="right">
-        <Link color="white" as={RLink} to={{ pathname: '/phonebook' }}>
-          <Box d="flex">
-            <Box as={MdPermContactCalendar} size="16px" color="green.400" />
-            <Text fontSize="xs">
-              Phonebook
-            </Text>
+        <Link color="green.400" as={RLink} to={{ pathname: '/phonebook' }}>
+          <Box bg="gray.100" rounded="5px" p="3">
+            <Box d="flex">
+              <Box as={MdPermContactCalendar} size="16px" color="green.400" />
+              <Text fontSize="xs">
+                Phonebook
+              </Text>
+            </Box>
           </Box>
         </Link>
       </Box>
