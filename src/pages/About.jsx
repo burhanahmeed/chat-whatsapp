@@ -32,7 +32,7 @@ const AboutPage = () => {
       <Box>
         <Text fontWeight="bold">Support</Text>
         <Box my="2">
-          <Button verticalAlign="top" d="inline-block" onClick={gotoKaryakarsa} variantColor="green">Karyakarsa</Button>
+          <Button verticalAlign="top" mb="2" d="inline-block" onClick={gotoKaryakarsa} variantColor="green">Karyakarsa</Button>
           <Link mx="3" d="inline-block" as="a" href="https://www.buymeacoffee.com/zOkT07A" isExternal>
             <Image src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" h="40px" />
           </Link>

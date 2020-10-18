@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import './App.css';
 
-import { Box, Text, Link, Flex, Badge } from "@chakra-ui/core";
+import { Box, Text, Image, Link, Flex, Badge } from "@chakra-ui/core";
 
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
@@ -11,21 +11,32 @@ import History from './pages/History.jsx';
 import { Route, Switch, Link as RLink, BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
+  const [isTextShowed, setIsTextShowed] = useState(true)
+  useEffect(() => {
+    let width = window.innerWidth
+    if (width < 500) {
+      setIsTextShowed(false)
+    }
+  }, [])
   return (
     <Box w="100%" minH="100vh" bg="gray.50">
       <Router>
         <Box alignItems="center" p="5">
           <Box d="block" textAlign="center" mb="4">
-            <Text 
-              m="0"
-              fontSize="3xl" 
-              fontWeight="bold"
-              color="green.700"
-            >
-              <Link as={RLink} to="/">
-                Whatsy
-              </Link>
-            </Text>
+            <Box>
+              <Image verticalAlign="top" d="inline-block" m="auto" h="40px" src="/Whatsy.png" alt="history" />
+              <Text 
+                d="inline-block"
+                m="0"
+                fontSize="3xl" 
+                fontWeight="bold"
+                color="green.700"
+              >
+                <Link as={RLink} to="/">
+                  Whatsy
+                </Link>
+              </Text>
+            </Box>
             <Text fontSize="xs">
               Send Whatsapp message without saving the number on your phone.
             </Text>
@@ -34,24 +45,44 @@ function App() {
             <Box textAlign="center">
               <Link mx="2" as={RLink} to="/">
                 <Box bg="gray.200" p="2" d="inline-block" borderRadius="5px">
-                🏠 Home
+                🏠
+                {
+                  isTextShowed ? ' Home' : ''
+                }
                 </Box>
               </Link>
               <Link mx="2" as={RLink} to="/history">
                 <Box bg="gray.200" p="2" d="inline-block" borderRadius="5px">
-                🧳 Message history
+                🧳
+                {
+                  isTextShowed ? ' Message history' : ''
+                }
                 </Box>
               </Link>
               <Link mx="2" as={RLink} to="/about">
                 <Box bg="gray.200" p="2" d="inline-block" borderRadius="5px">
-                👋🏻 About
+                👋🏻
+                {
+                  isTextShowed ? ' About' : ''
+                }
                 </Box>
               </Link>
             </Box>
           </Box>
 
           <Box w="100%">
-            <Flex align="center" w="70%" borderRadius="md" m="5" mx="auto">
+            <Flex 
+              align="center" 
+              borderRadius="md" 
+              m="5" 
+              mx="auto"
+              width={[
+                "100%", // base
+                "70%", // 480px upwards
+                "70%", // 768px upwards
+                "70%", // 992px upwards
+              ]}
+            >
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />

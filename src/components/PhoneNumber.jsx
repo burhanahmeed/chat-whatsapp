@@ -33,6 +33,12 @@ const InputNumber = ({ onNumberChange }) => {
           color="green.800"
           value={number}
           onChange={handleNumberChange}
+          w={[
+            '84%',
+            '90%',
+            '100%',
+            '100%'
+          ]}
         />
       </InputGroup>
       <Box mt="2" float="right">
