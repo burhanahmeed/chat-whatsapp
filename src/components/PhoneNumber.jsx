@@ -8,20 +8,28 @@ import {
   Link,
   Text,
   Stack,
-  Badge
+  Badge,
+  useDisclosure
 } from "@chakra-ui/core";
 import { Link as RLink } from 'react-router-dom';
 import { MdPermContactCalendar } from "react-icons/md"
 import { AiOutlineWhatsApp } from "react-icons/ai"
 import { BiBroadcast } from "react-icons/bi"
+import BroadcastModal from "../components/BroadcastModal.jsx"
 
 const InputNumber = ({ onNumberChange }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [number, setNumber] = React.useState('')
   const handleNumberChange = (e) => {
     let value = e.target.value
     setNumber(value)
     onNumberChange(value)
   }
+  const handleModalClose = () => {
+    // setModalProps({})
+    onClose()
+  }
+
   return (
     <Box>
       <InputGroup>
@@ -44,7 +52,7 @@ const InputNumber = ({ onNumberChange }) => {
       </InputGroup>
       <Box mt="2" float="right">
         <Box d="flex">
-          <Link color="white" as={RLink} to={{ pathname: '/phonebook' }} px="2">
+          <Link color="white" as={RLink} mx="2" onClick={onOpen}>
             <Box bg="gray.500" rounded="5px" p="3">
               <Box d="flex">
                 <Box as={BiBroadcast} size="16px" color="white" />
@@ -66,6 +74,14 @@ const InputNumber = ({ onNumberChange }) => {
           </Link>
         </Box>
       </Box>
+      {
+        isOpen ? (
+          <BroadcastModal 
+            isOpen={isOpen} 
+            onClose={handleModalClose}            
+          />
+        ) : null
+      }
     </Box>
   )
 }
