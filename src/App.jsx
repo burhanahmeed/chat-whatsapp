@@ -43,7 +43,7 @@ function App() {
           </Box>
           <Box d="block">
             <Box textAlign="center">
-              <Link mx="2" as={RLink} to="/">
+              <Link mx="2" as={RLink} to="/" py="3">
                 <Box bg="gray.200" p="2" d="inline-block" borderRadius="5px">
                 🏠
                 {
@@ -51,7 +51,7 @@ function App() {
                 }
                 </Box>
               </Link>
-              <Link mx="2" as={RLink} to="/history">
+              <Link mx="2" as={RLink} to="/history" py="3">
                 <Box bg="gray.200" p="2" d="inline-block" borderRadius="5px">
                 🧳
                 {
@@ -59,7 +59,7 @@ function App() {
                 }
                 </Box>
               </Link>
-              <Link mx="2" as={RLink} to="/about">
+              <Link mx="2" as={RLink} to="/about" py="3">
                 <Box bg="gray.200" p="2" d="inline-block" borderRadius="5px">
                 👋🏻
                 {
