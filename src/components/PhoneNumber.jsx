@@ -61,9 +61,9 @@ const PhonebookNumber = ({ data, changeField }) => {
   return (
     <Box>
       <Stack isInline py="2">
-        <Text color="white">Send to: </Text>
-        <Badge>{ data.name } ({ data.number })</Badge>
-        <Link color="white" onClick={changeField}>
+        <Text>Send to: </Text>
+        <Badge bg="gray.500" color="white">{ data.name } ({ data.number })</Badge>
+        <Link onClick={changeField}>
           <Box d="flex">
             <Box as={AiOutlineWhatsApp} size="16px" color="green.400" mx="1" />
             <Text fontSize="xs">
