@@ -14,12 +14,19 @@ import { BiTrashAlt } from "react-icons/bi"
 
 const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
   const [iconShowed, setIconShowed] = useState(false)
+  const [isTextShowed, setIsTextShowed] = useState(true)
   const handleMouseEnter = () => setIconShowed(true)
   const handleMouseLeave = () => setIconShowed(false)
   const remove = (id) => {
     handleRemove({number: id})
     handleInit()
   }
+  useEffect(() => {
+    let width = window.innerWidth
+    if (width < 500) {
+      setIsTextShowed(false)
+    }
+  }, [])
 
   return (
     <Box 
@@ -35,11 +42,11 @@ const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
       <Box>
         <Text 
           fontWeight="bold" 
-          fontSize="md"
+          fontSize={[ 'xs', 'md' ]}
           color="green.700"
         >😊 { data.name }</Text>
         <Text 
-          fontSize="md"
+          fontSize={[ 'xs', 'md' ]}
           color="green.700"
         >📲 { data.number }</Text>
       </Box>
@@ -54,7 +61,10 @@ const BookItem = ({ data, handleRemove, handleInit, editModal }) => {
         }
         <Link color="white" as={RLink} to={{ pathname: '/', state: data }}>
           <Button variantColor="green" size="xs">
-            💬 Send Whatsapp
+            💬 
+            {
+              isTextShowed ? ' Send message' : ''
+            }
           </Button>
         </Link>
       </Box>
@@ -114,7 +124,7 @@ const Phonebook = () => {
           </Button>
         </Box>
       </Box>
-      <Box p="3" w="100%" h="calc(100vh - 290px)" overflowX="auto">
+      <Box p={[ '0', '3' ]} w="100%" h="calc(100vh - 290px)" overflowX="auto">
         {
           phonebooks.length > 0 ?
           phonebooks.map(el => {

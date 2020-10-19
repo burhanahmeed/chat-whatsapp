@@ -13,6 +13,7 @@ import {
 import { Link as RLink } from 'react-router-dom';
 import { MdPermContactCalendar } from "react-icons/md"
 import { AiOutlineWhatsApp } from "react-icons/ai"
+import { BiBroadcast } from "react-icons/bi"
 
 const InputNumber = ({ onNumberChange }) => {
   const [number, setNumber] = React.useState('')
@@ -42,16 +43,28 @@ const InputNumber = ({ onNumberChange }) => {
         />
       </InputGroup>
       <Box mt="2" float="right">
-        <Link color="green.400" as={RLink} to={{ pathname: '/phonebook' }}>
-          <Box bg="gray.100" rounded="5px" p="3">
-            <Box d="flex">
-              <Box as={MdPermContactCalendar} size="16px" color="green.400" />
-              <Text fontSize="xs">
-                Phonebook
-              </Text>
+        <Box d="flex">
+          <Link color="white" as={RLink} to={{ pathname: '/phonebook' }} px="2">
+            <Box bg="gray.500" rounded="5px" p="3">
+              <Box d="flex">
+                <Box as={BiBroadcast} size="16px" color="white" />
+                <Text fontSize="xs">
+                  &nbsp; Broadcast message
+                </Text>
+              </Box>
             </Box>
-          </Box>
-        </Link>
+          </Link>
+          <Link color="green.400" as={RLink} to={{ pathname: '/phonebook' }}>
+            <Box bg="gray.200" rounded="5px" p="3">
+              <Box d="flex">
+                <Box as={MdPermContactCalendar} size="16px" color="green.400" />
+                <Text fontSize="xs">
+                &nbsp; Phonebook
+                </Text>
+              </Box>
+            </Box>
+          </Link>
+        </Box>
       </Box>
     </Box>
   )
