@@ -52,16 +52,6 @@ const InputNumber = ({ onNumberChange }) => {
       </InputGroup>
       <Box mt="2" float="right">
         <Box d="flex">
-          <Link color="white" as={RLink} mx="2" onClick={onOpen}>
-            <Box bg="gray.500" rounded="5px" p="3">
-              <Box d="flex">
-                <Box as={BiBroadcast} size="16px" color="white" />
-                <Text fontSize="xs">
-                  &nbsp; Broadcast message
-                </Text>
-              </Box>
-            </Box>
-          </Link>
           <Link color="green.400" as={RLink} to={{ pathname: '/phonebook' }}>
             <Box bg="gray.200" rounded="5px" p="3">
               <Box d="flex">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Flex, Box, Stack, Textarea, Button } from "@chakra-ui/core";
 import CustomAlert from "../components/CustomAlert.jsx";
 import PhoneNumber from "../components/PhoneNumber.jsx";
+import HomeNav from '../components/HomeNavigation';
 
 const SubmitButton = (props) => {
   if (props.isLoading) {
@@ -82,6 +83,7 @@ const Home = (props) => {
   
   return (
     <Box w="100%">
+      <HomeNav />
       <Flex align="center" d="block" p="4">
         <Stack spacing={4}>
           <PhoneNumber 

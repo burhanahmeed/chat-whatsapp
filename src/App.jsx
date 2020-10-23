@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Phonebook from './pages/Phonebook.jsx';
 import History from './pages/History.jsx';
+import Broadcast from './pages/Broadcast.jsx';
 
 import { Route, Switch, Link as RLink, BrowserRouter as Router } from 'react-router-dom';
 
@@ -88,6 +89,7 @@ function App() {
                 <Route path="/about" component={About} />
                 <Route path="/phonebook" component={Phonebook} />
                 <Route path="/history" component={History} />
+                <Route path="/broadcast" component={Broadcast} />
               </Switch>
             </Flex>
           </Box>
