@@ -100,9 +100,6 @@ function App() {
         <Box>
           <Text fontSize="xs">
             A product by &nbsp;
-            <Link href="https://kusiaga.com" isExternal>
-              <Badge variantColor="green">Burhannahm</Badge>  
-            </Link> / 
             <Link href="https://twitter.com/burhannahm" isExternal>
               <Badge variantColor="green">@Burhannahm</Badge>  
             </Link>
